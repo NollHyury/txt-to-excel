@@ -13,9 +13,7 @@ origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
-    "http://10.1.23.79.weg.net:8000",
-    "http://192.168.53.1:8000",
-    "http://172.17.19.177:8000",
+    "http://localhost:8000",
 ]
 
 app.add_middleware(
