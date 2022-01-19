@@ -28,7 +28,6 @@ app.add_middleware(
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
 
-    teste = file
     try:
         os.mkdir("temp")
         print(os.getcwd())
@@ -42,8 +41,11 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     df = get_data_frame_from_text_job_file(new_file_name)
     
+    file_name = file.filename.split('.txt')[0]
 
-    with ExcelWriter(os.getcwd()+"/temp/"+'test.xlsx') as writer:
-        df.to_excel(writer)
+    with ExcelWriter(os.getcwd()+"/temp/"+f'{file_name}.xlsx') as writer:
+        df.to_excel(writer, index=False)
 
-    return FileResponse(path=os.getcwd()+"/temp/"+'test.xlsx', filename='tranformed', media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    return FileResponse(path=os.getcwd()+"/temp/"+f'{file_name}.xlsx', filename=f'{file_name}', media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+
